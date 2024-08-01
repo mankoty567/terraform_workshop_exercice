@@ -14,17 +14,10 @@ terraform init
 tree
 .
 ├── .gitignore
-├── .terraform.lock.hcl
 ├── api.tf
-├── database.tf
 ├── LICENSE
-├── network.tf
-├── nginx.tf
 ├── NOTICE.md
-├── outputs.tf
 ├── README.md
-├── variables.tf
-├── versions.tf
 ├── img
 │   ├── ...
 ├── nginx
@@ -36,7 +29,7 @@ tree
     ├── package.json
     └── server.js
 
-3 directories, 12 files
+3 directories, 5 files
 
 ```
 
@@ -48,66 +41,25 @@ Votre infrastructure finale ressemblera à ça :
 
 ![Représentation en schéma de l'infrastructure finale](./img/Infra-terraform.drawio.png)
 
-## Exercice 1 - Ecriture des images
+## Exercice 1 - Montage de l'infrastructure
 
-Pour commencer, nous allons nous concentrer sur 3 fichiers à compléter :
+En vous servant de la cartographie d'infrastructure renseignée plus haut, remettez en place les applications pour que le service soit contactable sut `http://localhost`.
+Pour cet exercice, vous êtes forcés de travailler avec la version 3.0.2 du provider. Aucune autre.
 
-- [Les deux instances d'api](api.tf)
-- [La base de données](database.tf)
-- [Le loadbalancer](nginx.tf)
+**Liens utiles :**
 
-Ces trois sont composés chacun de deux ressources :
+- https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs
 
-- Une docker image qui représente le dockerfile à build ou toutes les instructions relatives au build.
-- Un ou plusieurs containers pour lancer les applications.
+## Exercice 2 - Professionnalisation de l'environnement
 
-Pour se faire, vous aurez besoin de ces deux pages de référence qui vous aideront :
+Votre infrastructure est désormais fonctionnelle. Mais tout est actuellement dans un dossier sans qu'on puisse vraiment s'y retrouver.
 
-- [Documentation des images par terraform](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/container)
-- [Documentation des conteneurs par terraform](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/image)
+Deux objectifs sont à atteindre désormais :
 
-De plus, vous aurez probablement besoin de ces deux fonctions pour l'api :
+- Le premier est une implémentation pour que tout soit présent dans un dossier "docker", mais toujours lancé depuis la racine. [Voici un petit article qui pourrait s'avérer fort utile](https://developer.hashicorp.com/terraform/language/modules).
+- Synchroniser votre infrastructure avec HCP cloud, afin de pouvoir permettre une collaboration plus agréable sur une interface consultable pour les managers. Les runs doivent toujours être exécutées via la commande `terraform apply`. [Voici un petit article qui pourrait s'avérer fort utile](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started).
 
-- https://developer.hashicorp.com/terraform/language/functions/index_function
-- https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
+## Conclusion
 
-**L'objectif final est d'exécuter une run terraform qui vous transmet toutes les informations de chaque image.**
-
-```Bash
-terraform apply
-```
-
-![Exemple de résultat correct](./img/Result.png)
-
-Mais vous constatez que la connexion au localhost ne fonctionne pas encore malgré que les services semblent tourner si on entre la commande :
-
-```bash
-docker ps
-```
-
-## Exercice 2 - Mise en réseau
-
-Vous l'avez constaté, mais les conteneurs ne semblent que démarrer en boucle encore et encore. C'est parce que l'application se base sur des noms de domaines en interne qui ne sont pas définit par le réseau de docker.
-
-Nous devons donc agir sur le réseau, et nous concentrer sur le [dernier fichier](./network.tf). Mais aussi faire des mises à jour sur les pods pour permettre que :
-
-- L'api soit identifié par `web1` pour l'api 1 et `web2` pour l'api 2.
-- La base de données soit identifiée sous le nom de `redis`.
-
-Pour se faire, vous aurez besoin de deux ressources :
-
-- [Les réseau docker](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/network)
-- [La gestion de domaines interne sur conteneur](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/container#nestedblock--host)
-
-**L'objectif final est d'exécuter une run terraform qui vous transmet toutes les informations de chaque image.**
-
-```Bash
-terraform apply
-```
-
-![Exemple de résultat correct](./img/Result2.png)
-
-## Pour aller plus loin
-
-L'exercice vous a plu ? Vous avez compris les bases de terraform ?
-Peut-être que le challenge sur la branche `From-Scratch`peut vous intéresser. Il remet l'exercice sans aucune indications, mais en poussant plus loin pour maîtriser des aspects plus avancés de docker.
+Voilà une introduction un peu plus complexe à des cas de figures auxquels vous pourrez être confrontés plus tard, avec une implémentation terraform. Cela ne couvre pas les cas de figure, et des bonnes pratiques docker pourraient être implémentés.
+Mais vous avez ici déjà des bases solides pour commencer terraform.
