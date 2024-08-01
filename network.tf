@@ -1,3 +1,3 @@
 resource "docker_network" "example_network" {
-  name = "example-network"
+  # Add your instructions here
 }
