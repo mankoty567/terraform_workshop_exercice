@@ -15,11 +15,11 @@ tree
 .
 ├── .gitignore
 ├── .terraform.lock.hcl
-├── api.tf
+├── web.tf
 ├── database.tf
 ├── LICENSE
 ├── network.tf
-├── nginx.tf
+├── proxy.tf
 ├── NOTICE.md
 ├── outputs.tf
 ├── README.md
@@ -27,7 +27,7 @@ tree
 ├── versions.tf
 ├── img
 │   ├── ...
-├── nginx
+├── proxy
 │   ├── Dockerfile
 │   └── nginx.conf
 └── web
