@@ -20,7 +20,7 @@ tree
 ├── README.md
 ├── img
 │   ├── ...
-├── nginx
+├── proxy
 │   ├── Dockerfile
 │   └── nginx.conf
 └── web
@@ -35,7 +35,7 @@ tree
 
 ## Objectif
 
-L'objectif final est que votre application, déjà fonctionnelle, s'exécute et puisse être contactée sur le point d'entrée : http://localhost.
+L'objectif final est que votre application, déjà fonctionnelle, s'exécute et puisse être contactée sur le point d'entrée : `http://localhost`.
 
 Votre infrastructure finale ressemblera à ça :
 
@@ -43,7 +43,7 @@ Votre infrastructure finale ressemblera à ça :
 
 ## Exercice 1 - Montage de l'infrastructure
 
-En vous servant de la cartographie d'infrastructure renseignée plus haut, remettez en place les applications pour que le service soit contactable sut `http://localhost`.
+En vous servant de la cartographie d'infrastructure renseignée plus haut, remettez en place les applications pour que le service soit contactable sur `http://localhost`.
 Pour cet exercice, vous êtes forcés de travailler avec la version 3.0.2 du provider. Aucune autre.
 
 **Liens utiles :**
@@ -56,10 +56,10 @@ Votre infrastructure est désormais fonctionnelle. Mais tout est actuellement da
 
 Deux objectifs sont à atteindre désormais :
 
-- Le premier est une implémentation pour que tout soit présent dans un dossier "docker", mais toujours lancé depuis la racine. [Voici un petit article qui pourrait s'avérer fort utile](https://developer.hashicorp.com/terraform/language/modules).
+- Le premier est une mise en place de généricité, afin de s'approcher de l'industrialisation de configuration. [Voici un petit article qui pourrait s'avérer fort utile](https://developer.hashicorp.com/terraform/language/modules).
 - Synchroniser votre infrastructure avec HCP cloud, afin de pouvoir permettre une collaboration plus agréable sur une interface consultable pour les managers. Les runs doivent toujours être exécutées via la commande `terraform apply`. [Voici un petit article qui pourrait s'avérer fort utile](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started).
 
 ## Conclusion
 
-Voilà une introduction un peu plus complexe à des cas de figures auxquels vous pourrez être confrontés plus tard, avec une implémentation terraform. Cela ne couvre pas les cas de figure, et des bonnes pratiques docker pourraient être implémentés.
-Mais vous avez ici déjà des bases solides pour commencer terraform.
+Voilà une introduction un peu plus complexe à des cas de figures auxquels vous pourrez être confrontés si terraform fait partie intégrante de vos métier. Cela ne couvre pas tous les cas de figures, et des bonnes pratiques docker pourraient être implémentés.
+Mais vous avez ici déjà des bases solides pour commencer terraform en professionnel.
