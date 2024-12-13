@@ -42,7 +42,7 @@ tree
 
 ## Objectif
 
-L'objectif final est que votre application, déjà fonctionnelle, s'exécute et puisse être contactée sur le point d'entrée : http://localhost.
+L'objectif final est que votre application, déjà fonctionnelle, s'exécute et puisse être contactée sur le point d'entrée : ` http://localhost `.
 
 Votre infrastructure finale ressemblera à ça :
 
@@ -52,13 +52,13 @@ Votre infrastructure finale ressemblera à ça :
 
 Pour commencer, nous allons nous concentrer sur 3 fichiers à compléter :
 
-- [Les deux instances d'api](api.tf)
-- [La base de données](database.tf)
-- [Le loadbalancer](nginx.tf)
+- [Les deux instances d'api](api.tf) : sera build à partir d'un dockerfile local, se trouvant [ici](./web/Dockerfile).
+- [La base de données](database.tf) : cette dernière fonctionnera sous l'image [redis](https://hub.docker.com/_/redis).
+- [Le loadbalancer](nginx.tf) : ce dernier fonctionnera sur une image custom nginx. Vous trouverez le dockerfile tout prêt [ici](./proxy/Dockerfile), *aucun besoin de le modifier*.
 
 Ces trois sont composés chacun de deux ressources :
 
-- Une docker image qui représente le dockerfile à build ou toutes les instructions relatives au build.
+- Une docker image qui représente l'image à pull ou toutes les instructions relatives au build.
 - Un ou plusieurs containers pour lancer les applications.
 
 Pour se faire, vous aurez besoin de ces deux pages de référence qui vous aideront :
@@ -66,7 +66,7 @@ Pour se faire, vous aurez besoin de ces deux pages de référence qui vous aider
 - [Documentation des images par terraform](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/container)
 - [Documentation des conteneurs par terraform](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/image)
 
-De plus, vous aurez probablement besoin de ces deux fonctions pour l'api :
+De plus, vous aurez probablement besoin de ces deux fonctions pour l'api. Un exemple sera présent dans le code pour vous aider :
 
 - https://developer.hashicorp.com/terraform/language/functions/index_function
 - https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
@@ -91,7 +91,7 @@ Vous l'avez constaté, mais les conteneurs ne semblent que démarrer en boucle e
 
 Nous devons donc agir sur le réseau, et nous concentrer sur le [dernier fichier](./network.tf). Mais aussi faire des mises à jour sur les pods pour permettre que :
 
-- L'api soit identifié par `web1` pour l'api 1 et `web2` pour l'api 2.
+- L'api soit identifiée sur le réseau par `web1` pour l'api 1 et `web2` pour l'api 2.
 - La base de données soit identifiée sous le nom de `redis`.
 
 Pour se faire, vous aurez besoin de deux ressources :
