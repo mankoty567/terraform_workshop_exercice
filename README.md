@@ -54,7 +54,7 @@ Pour commencer, nous allons nous concentrer sur 3 fichiers à compléter :
 
 - [Les deux instances d'api](api.tf) : sera build à partir d'un dockerfile local, se trouvant [ici](./web/Dockerfile).
 - [La base de données](database.tf) : cette dernière fonctionnera sous l'image [redis](https://hub.docker.com/_/redis).
-- [Le loadbalancer](nginx.tf) : ce dernier fonctionnera sur une image custom nginx. Vous trouverez le dockerfile tout prêt [ici](./proxy/Dockerfile), *aucun besoin de le modifier*.
+- [Le loadbalancer](nginx.tf) : ce dernier fonctionnera sur une image custom nginx. Vous trouverez le dockerfile tout prêt [ici](./proxy/Dockerfile), *aucun besoin de modifier la configuration*.
 
 Ces trois sont composés chacun de deux ressources :
 
